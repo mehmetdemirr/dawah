@@ -1,0 +1,25 @@
+{
+    "hello":"merhaba",
+
+    "ocak":"Ocak",
+    "subat":"Şubat",
+    "mart":"Mart",
+    "nisan":"Nisan",
+    "mayis":"Mayıs",
+    "haziran":"Haziran",
+    "temmuz":"Temmuz",
+    "agustos":"Ağustos",
+    "eylul":"Eylül",
+    "ekim":"Ekim",
+    "kasim":"Kasım",
+    "aralik":"Aralık",
+
+    "pazartesi": "Pzt",
+    "sali": "Sal",
+    "carsamba": "Çrş",
+    "persembe": "Per",
+    "cuma": "Cum",
+    "cumartesi": "Cmt",
+    "pazar": "Paz"
+
+}

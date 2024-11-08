@@ -1,0 +1,25 @@
+{
+    "hello":"hellommmm",
+
+    "ocak": "January",
+    "subat": "February",
+    "mart": "March",
+    "nisan": "April",
+    "mayis": "May",
+    "haziran": "June",
+    "temmuz": "July",
+    "agustos": "August",
+    "eylul": "September",
+    "ekim": "October",
+    "kasim": "November",
+    "aralik": "December",
+
+    "pazartesi": "Mon",
+    "sali": "Tue",
+    "carsamba": "Wed",
+    "persembe": "Thu",
+    "cuma": "Fri",
+    "cumartesi": "Sat",
+    "pazar": "Sun"
+    
+}
