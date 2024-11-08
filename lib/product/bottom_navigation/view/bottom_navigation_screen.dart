@@ -91,7 +91,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             ),
             IconButton(
               icon: Icon(
-                Icons.diversity_3,
+                Icons.rocket_launch_outlined,
                 color: state.selectedIndex == 1 ? activeColor : inactiveColor,
               ),
               onPressed: () {
@@ -105,7 +105,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             ),
             IconButton(
               icon: Icon(
-                Icons.account_balance_outlined,
+                Icons.apps_outlined,
                 color: state.selectedIndex == 3 ? activeColor : inactiveColor,
               ),
               onPressed: () {
