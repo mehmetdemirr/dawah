@@ -56,7 +56,7 @@ class _StoryCardWidgetState extends State<StoryCardWidget>
     return GestureDetector(
       onTap: _handleTap,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           children: [
             Stack(
@@ -113,10 +113,10 @@ class _StoryCardWidgetState extends State<StoryCardWidget>
                   ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 5),
             Text(
               widget.story.text,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
         ),

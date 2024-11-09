@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:davet/core/extension/screen_size.dart';
 import 'package:davet/core/location/location_model.dart';
+import 'package:davet/core/navigation/app_router.dart';
 import 'package:davet/core/utilty/hive_items.dart';
 import 'package:davet/core/utilty/images_items.dart';
+import 'package:davet/product/apps/view/apps_screen.dart';
 import 'package:davet/product/home/widget/story_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -34,80 +37,71 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Anasayfa")),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: SizedBox(
-              height: 150,
-              child: ListView.builder(
-                itemCount: storyList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return StoryCardWidget(
-                    story: storyList[index],
-                    onTap: () => _showStory(context, storyList[index]),
-                  );
-                },
-              ),
-            ),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            // context.router.pushNamed(RouterItem.setting.str());
+          },
+          icon: Image.asset(ImageItem.setting.str()),
+        ),
+        title: Text(
+          "Ana Sayfa",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // context.router.pushNamed(RouterItem.notification.str());
+            },
+            icon: Image.asset(ImageItem.notification.str()),
           ),
-          const Text("HomeScreen"),
-          Text("latidude: ${location?.latitude ?? "-"}"),
-          Text("long: ${location?.longitude ?? "-"}"),
+          IconButton(
+            onPressed: () {
+              // context.read<BottomNavigationViewModel>().changeSelectedIndex(4);
+            },
+            icon: const Icon(
+              Icons.person,
+            ),
+          )
         ],
       ),
-    );
-  }
-
-  void _showStory(BuildContext context, StoryModel story) async {
-    // // Hikaye açılmadan önce kısa bir loading animasyonu göstermek için
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (BuildContext context) {
-    //     return const Center(
-    //       child: CircularProgressIndicator(
-    //         color: Colors.purple,
-    //       ),
-    //     );
-    //   },
-    // );
-
-    // // Hikaye yükleniyormuş gibi küçük bir gecikme ekleyelim
-    // await Future.delayed(const Duration(seconds: 1));
-
-    // // Loading ekranını kapatıyoruz
-    // Navigator.pop(context);
-
-    // Hikaye görüntüleyiciyi açalım
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.black,
-      builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.9,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Image.asset(
-                  story.imageItem.str(),
-                  fit: BoxFit.contain,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: SizedBox(
+                height: 117,
+                child: ListView.builder(
+                  itemCount: storyList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return StoryCardWidget(
+                      story: storyList[index],
+                      onTap: () {
+                        context.router.pushNamed(RouterItem.storyView.str());
+                      },
+                    );
+                  },
                 ),
               ),
-              const SizedBox(height: 20),
-              Text(
-                story.text,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            ],
-          ),
-        );
-      },
+            ),
+            Text(
+              "Merhaba,Mehmet !",
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 27,
+                  ),
+            ),
+            const Text("HomeScreen"),
+            Text("latidude: ${location?.latitude ?? "-"}"),
+            Text("long: ${location?.longitude ?? "-"}"),
+          ],
+        ),
+      ),
     );
   }
 }

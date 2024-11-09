@@ -1,10 +1,14 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:davet/product/apps/view/apps_screen.dart';
 import 'package:davet/product/bottom_navigation/view/bottom_navigation_screen.dart';
 import 'package:davet/product/home/view/home_screen.dart';
+import 'package:davet/product/profile/view/profile_screen.dart';
+import 'package:davet/product/setting/setting_screen.dart';
 import 'package:davet/product/splash/view/splash_screen.dart';
 import 'package:davet/product/starting/view/starting_screen.dart';
+import 'package:davet/product/story_view/view/story_view_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -30,7 +34,10 @@ class AppRouter extends RootStackRouter {
         AutoRoute(
           path: RouterItem.bottomNavigation.str(),
           page: BottomNavigationRoute.page,
-          // initial: true,
+        ),
+        AutoRoute(
+          path: RouterItem.storyView.str(),
+          page: StoryViewRoute.page,
         ),
       ];
 }
@@ -38,6 +45,7 @@ class AppRouter extends RootStackRouter {
 enum RouterItem {
   splash,
   starting,
+  storyView,
   login,
   register,
   resetPassword,

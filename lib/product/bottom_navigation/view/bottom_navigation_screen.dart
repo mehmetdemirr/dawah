@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:davet/product/apps/view/apps_screen.dart';
 import 'package:davet/product/bottom_navigation/viewmodel/bottom_navigation_viewmodel.dart';
 import 'package:davet/product/home/view/home_screen.dart';
+import 'package:davet/product/profile/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,10 +16,10 @@ class BottomNavigationScreen extends StatefulWidget {
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   List<Widget> screenList = [
     const HomeScreen(),
+    const AppsScreen(),
     const HomeScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
+    const AppsScreen(),
+    const ProfileScreen(),
   ];
   Color inactiveColor = const Color.fromARGB(255, 161, 163, 168);
   Color activeColor = const Color.fromRGBO(45, 49, 66, 1);
