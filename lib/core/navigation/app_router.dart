@@ -11,6 +11,7 @@ import 'package:davet/product/setting/setting_screen.dart';
 import 'package:davet/product/splash/view/splash_screen.dart';
 import 'package:davet/product/starting/view/starting_screen.dart';
 import 'package:davet/product/story_view/view/story_view_screen.dart';
+import 'package:davet/product/task/view/task_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -53,6 +54,10 @@ class AppRouter extends RootStackRouter {
           path: RouterItem.notification.str(),
           page: NotificationRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.task.str(),
+          page: NotificationRoute.page,
+        ),
       ];
 }
 
@@ -69,6 +74,7 @@ enum RouterItem {
   game,
   setting,
   notification,
+  task,
 }
 
 extension RouterItems on RouterItem {

@@ -198,3 +198,22 @@ class StoryViewRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [TaskScreen]
+class TaskRoute extends PageRouteInfo<void> {
+  const TaskRoute({List<PageRouteInfo>? children})
+      : super(
+          TaskRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TaskRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TaskScreen();
+    },
+  );
+}

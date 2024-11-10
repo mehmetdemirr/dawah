@@ -4,6 +4,7 @@ import 'package:davet/product/bottom_navigation/viewmodel/bottom_navigation_view
 import 'package:davet/product/game/view/game_screen.dart';
 import 'package:davet/product/home/view/home_screen.dart';
 import 'package:davet/product/profile/view/profile_screen.dart';
+import 'package:davet/product/task/view/task_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   List<Widget> screenList = [
     const HomeScreen(),
     const GameScreen(),
-    const HomeScreen(),
+    const TaskScreen(),
     const AppsScreen(),
     const ProfileScreen(),
   ];
