@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:davet/product/apps/view/apps_screen.dart';
 import 'package:davet/product/bottom_navigation/view/bottom_navigation_screen.dart';
+import 'package:davet/product/game/view/game_screen.dart';
 import 'package:davet/product/home/view/home_screen.dart';
+import 'package:davet/product/notification/view/notification_screen.dart';
 import 'package:davet/product/profile/view/profile_screen.dart';
 import 'package:davet/product/setting/setting_screen.dart';
 import 'package:davet/product/splash/view/splash_screen.dart';
@@ -39,6 +41,18 @@ class AppRouter extends RootStackRouter {
           path: RouterItem.storyView.str(),
           page: StoryViewRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.game.str(),
+          page: GameRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.setting.str(),
+          page: SettingRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.notification.str(),
+          page: NotificationRoute.page,
+        ),
       ];
 }
 
@@ -52,6 +66,9 @@ enum RouterItem {
   forgotPassword,
   bottomNavigation,
   home,
+  game,
+  setting,
+  notification,
 }
 
 extension RouterItems on RouterItem {

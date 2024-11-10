@@ -48,6 +48,25 @@ class BottomNavigationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [GameScreen]
+class GameRoute extends PageRouteInfo<void> {
+  const GameRoute({List<PageRouteInfo>? children})
+      : super(
+          GameRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GameRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const GameScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -62,6 +81,25 @@ class HomeRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const HomeScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [NotificationScreen]
+class NotificationRoute extends PageRouteInfo<void> {
+  const NotificationRoute({List<PageRouteInfo>? children})
+      : super(
+          NotificationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NotificationRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const NotificationScreen();
     },
   );
 }
