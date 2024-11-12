@@ -16,6 +16,9 @@ enum ImageItem {
   filter,
   add,
   search,
+  gold,
+  bronz,
+  copper,
 }
 
 String defaultValue = 'assets/images';
@@ -23,6 +26,9 @@ String defaultValue = 'assets/images';
 extension ImageItems on ImageItem {
   String str() {
     return switch (this) {
+      ImageItem.gold => '$defaultValue/gold.png',
+      ImageItem.copper => '$defaultValue/copper.png',
+      ImageItem.bronz => '$defaultValue/bronz.png',
       ImageItem.startImage => '$defaultValue/start_image.png',
       //
       ImageItem.logo => '$defaultValue/cafe.png',

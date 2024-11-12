@@ -12,6 +12,13 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  final List<Map<String, dynamic>> levels = [
+    {"level": 1, "progress": 70, "stars": 3},
+    {"level": 2, "progress": 50, "stars": 2},
+    {"level": 3, "progress": 30, "stars": 1},
+    {"level": 4, "progress": 0, "stars": 0},
+    {"level": 5, "progress": 0, "stars": 0},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,65 +74,126 @@ class _GameScreenState extends State<GameScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
-            Container(
-              width: context.width,
-              height: 75,
-              decoration: BoxDecoration(
-                // color: ColorItem.labelColor.str().withOpacity(0.55),
-                // color: Colors.purple.withOpacity(0.7),
-                color: Colors.black87,
-                borderRadius: BorderRadiusItem.medium.str(),
-              ),
-              child: Row(
+            const GameTitleWidget(),
+            const SizedBox(height: 5),
+            SizedBox(
+              height: 100,
+              child: Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
+                  Positioned(
+                    top: 9,
+                    child: Container(
+                      width: 79,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade500,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade500, // Gölge rengi
+                            blurRadius: 5.0, // Bulanıklık miktarı
+                            offset: const Offset(
+                                0, 4), // Yatay ve dikey kayma (x, y)
+                            spreadRadius: 1.5, // Gölgenin yayılma oranı
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 80,
+                    height: 70,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 211, 209, 209),
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "1. KISIM, 1. ÜNİTE",
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Colors.white.withOpacity(0.8),
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
-                                  ),
-                        ),
-                        Text(
-                          "Kişileri betimle",
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 20,
-                                  ),
+                        Center(
+                          child: SizedBox(
+                            width: 55,
+                            child: Icon(
+                              Icons.star_rounded,
+                              color: Colors.grey.shade500,
+                              size: 55,
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const Spacer(),
-                  Container(
-                    width: 3,
-                    height: 75,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.7),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Icon(
-                      Icons.menu_book_outlined,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
                 ],
               ),
-            ),
+            )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class GameTitleWidget extends StatelessWidget {
+  const GameTitleWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: context.width,
+      height: 75,
+      decoration: BoxDecoration(
+        // color: ColorItem.labelColor.str().withOpacity(0.55),
+        // color: Colors.purple.withOpacity(0.7),
+        color: Colors.black87,
+        borderRadius: BorderRadiusItem.medium.str(),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "1. KISIM, 1. ÜNİTE",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white.withOpacity(0.8),
+                        fontWeight: FontWeight.w900,
+                        fontSize: 15,
+                      ),
+                ),
+                Text(
+                  "Kişileri betimle",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          const Spacer(),
+          Container(
+            width: 3,
+            height: 75,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.7),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Icon(
+              Icons.menu_book_outlined,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        ],
       ),
     );
   }
