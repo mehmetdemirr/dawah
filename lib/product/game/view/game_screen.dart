@@ -3,6 +3,7 @@ import 'package:davet/core/extension/screen_size.dart';
 import 'package:davet/core/utilty/border_radius_items.dart';
 import 'package:davet/core/utilty/color_items.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 @RoutePage()
 class GameScreen extends StatefulWidget {
@@ -12,15 +13,10 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final List<Map<String, dynamic>> levels = [
-    {"level": 1, "progress": 70, "stars": 3},
-    {"level": 2, "progress": 50, "stars": 2},
-    {"level": 3, "progress": 30, "stars": 1},
-    {"level": 4, "progress": 0, "stars": 0},
-    {"level": 5, "progress": 0, "stars": 0},
-  ];
   @override
   Widget build(BuildContext context) {
+    double height = (context.height - 200) / 45;
+    double width = (context.width - 212);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -76,59 +72,126 @@ class _GameScreenState extends State<GameScreen> {
           children: [
             const GameTitleWidget(),
             const SizedBox(height: 5),
-            SizedBox(
-              height: 100,
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 9,
-                    child: Container(
-                      width: 79,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade500,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(50)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade500, // Gölge rengi
-                            blurRadius: 5.0, // Bulanıklık miktarı
-                            offset: const Offset(
-                                0, 4), // Yatay ve dikey kayma (x, y)
-                            spreadRadius: 1.5, // Gölgenin yayılma oranı
-                          ),
-                        ],
-                      ),
-                    ),
+            CircularPercentIndicator(
+              backgroundColor: Colors.grey.shade400,
+              radius: 55.0,
+              lineWidth: 8.0,
+              animation: true,
+              animationDuration: 2000,
+              percent: 0.4,
+              animateFromLastPercent: true,
+              center: Container(
+                // color: Colors.amber,
+                child: const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 10),
+                      StarLevelWidget(),
+                    ],
                   ),
-                  Container(
-                    width: 80,
-                    height: 70,
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 211, 209, 209),
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: SizedBox(
-                            width: 55,
-                            child: Icon(
-                              Icons.star_rounded,
-                              color: Colors.grey.shade500,
-                              size: 55,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                ),
+              ),
+              circularStrokeCap: CircularStrokeCap.round,
+              progressColor: Colors.purple,
+              widgetIndicator: Center(
+                child: Container(
+                  height: 10,
+                  width: 10,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  padding: const EdgeInsets.all(5),
+                ),
+              ),
+            ),
+            SizedBox(height: height),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: width / 2 - 40),
+                      const StarLevelWidget(),
+                    ],
+                  ),
+                  SizedBox(height: height),
+                  Row(
+                    children: [
+                      SizedBox(width: width / 2 - 80),
+                      const StarLevelWidget(),
+                    ],
+                  ),
+                  SizedBox(height: height),
+                  const StarLevelWidget(),
+                  SizedBox(height: height),
+                  const StarLevelWidget(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StarLevelWidget extends StatelessWidget {
+  const StarLevelWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: Stack(
+        children: [
+          Positioned(
+            top: 9,
+            child: Container(
+              width: 79,
+              height: 70,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade500,
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade500, // Gölge rengi
+                    blurRadius: 5.0, // Bulanıklık miktarı
+                    offset: const Offset(0, 4), // Yatay ve dikey kayma (x, y)
+                    spreadRadius: 1.5, // Gölgenin yayılma oranı
                   ),
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Container(
+            width: 80,
+            height: 70,
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 211, 209, 209),
+              borderRadius: BorderRadius.all(Radius.circular(100)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: SizedBox(
+                    width: 55,
+                    child: Icon(
+                      Icons.star_rounded,
+                      color: Colors.grey.shade500,
+                      size: 55,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
