@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:davet/core/extension/screen_size.dart';
 import 'package:davet/core/location/location_model.dart';
@@ -12,6 +14,7 @@ import 'package:davet/product/home/widget/story_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 @RoutePage()
@@ -32,11 +35,43 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   late Location? location;
 
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+  Timer? _timer;
+
+  final List<String> _items = [
+    "Hadis: İnsanların hayırlısı insanlara faydalı olandır.",
+    "Dua: Rabbim, bizi doğru yoldan ayırma.",
+    "Günün Sözü: Hayat, ne kadar güzel baktığınla ilgilidir.",
+    "İlham: Başarı, sabır ve çalışkanlıkla gelir.",
+  ];
+
   @override
   void initState() {
     super.initState();
+    //konum işlemleri
     Box<Location> locationBox = Hive.box<Location>(HiveItem.location.str());
     location = locationBox.get(HiveItem.location.str());
+    // Otomatik sayfa geçişi
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      if (_currentIndex < _items.length - 1) {
+        _currentIndex++;
+      } else {
+        _currentIndex = 0; // Baştan başla
+      }
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              // context.router.pushNamed(RouterItem.notification.str());
+              context.router.pushNamed(RouterItem.notification.str());
             },
             icon: Image.asset(ImageItem.notification.str()),
           ),
@@ -145,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              "İlerlemen",
+              "Günün Rehberi",
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -157,6 +192,50 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadiusItem.large.str(),
                 color: ColorItem.labelColor.str().withOpacity(0.6),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                      itemCount: _items.length,
+                      itemBuilder: (context, index) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              _items[index],
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  SmoothPageIndicator(
+                    controller: _pageController,
+                    count: _items.length,
+                    effect: WormEffect(
+                      dotHeight: 12,
+                      dotWidth: 12,
+                      activeDotColor: Colors.blueGrey.shade50,
+                      dotColor: Colors.black26,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
               ),
             ),
             const SizedBox(height: 16),

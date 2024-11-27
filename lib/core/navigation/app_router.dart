@@ -7,6 +7,7 @@ import 'package:davet/product/game/view/game_screen.dart';
 import 'package:davet/product/home/view/home_screen.dart';
 import 'package:davet/product/notification/view/notification_screen.dart';
 import 'package:davet/product/profile/view/profile_screen.dart';
+import 'package:davet/product/profile_edit/view/profile_edit_screen.dart';
 import 'package:davet/product/setting/setting_screen.dart';
 import 'package:davet/product/splash/view/splash_screen.dart';
 import 'package:davet/product/starting/view/starting_screen.dart';
@@ -57,7 +58,11 @@ class AppRouter extends RootStackRouter {
         ),
         AutoRoute(
           path: RouterItem.task.str(),
-          page: NotificationRoute.page,
+          page: TaskRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.profileEdit.str(),
+          page: ProfileEditRoute.page,
         ),
       ];
 }
@@ -76,6 +81,7 @@ enum RouterItem {
   setting,
   notification,
   task,
+  profileEdit,
 }
 
 extension RouterItems on RouterItem {
