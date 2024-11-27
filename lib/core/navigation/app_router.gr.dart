@@ -182,10 +182,17 @@ class StartingRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [StoryViewScreen]
-class StoryViewRoute extends PageRouteInfo<void> {
-  const StoryViewRoute({List<PageRouteInfo>? children})
-      : super(
+class StoryViewRoute extends PageRouteInfo<StoryViewRouteArgs> {
+  StoryViewRoute({
+    Key? key,
+    required List<String> imageList,
+    List<PageRouteInfo>? children,
+  }) : super(
           StoryViewRoute.name,
+          args: StoryViewRouteArgs(
+            key: key,
+            imageList: imageList,
+          ),
           initialChildren: children,
         );
 
@@ -194,9 +201,29 @@ class StoryViewRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const StoryViewScreen();
+      final args = data.argsAs<StoryViewRouteArgs>();
+      return StoryViewScreen(
+        key: args.key,
+        imageList: args.imageList,
+      );
     },
   );
+}
+
+class StoryViewRouteArgs {
+  const StoryViewRouteArgs({
+    this.key,
+    required this.imageList,
+  });
+
+  final Key? key;
+
+  final List<String> imageList;
+
+  @override
+  String toString() {
+    return 'StoryViewRouteArgs{key: $key, imageList: $imageList}';
+  }
 }
 
 /// generated route for

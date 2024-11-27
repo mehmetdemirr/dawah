@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              context.router.pushNamed(RouterItem.notification.str());
+              // context.router.pushNamed(RouterItem.notification.str());
             },
             icon: Image.asset(ImageItem.notification.str()),
           ),
@@ -87,7 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     return StoryCardWidget(
                       story: storyList[index],
                       onTap: () {
-                        context.router.pushNamed(RouterItem.storyView.str());
+                        context.router.push(StoryViewRoute(
+                          imageList: const [
+                            "https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg",
+                            "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
+                            "https://media.giphy.com/media/XcA8krYsrEAYXKf4UQ/giphy.gif",
+                            "https://insanisi.com/assets/frontend/img/logo/logo.png",
+                          ],
+                        ));
                       },
                     );
                   },

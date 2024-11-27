@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:davet/core/cache/shared_pref.dart';
+import 'package:davet/core/navigation/app_router.dart';
 import 'package:davet/core/theme/dark_theme.dart';
 import 'package:davet/core/theme/light_theme.dart';
 import 'package:davet/core/theme/theme_view_model.dart';
@@ -93,9 +94,9 @@ class _SettingScreenState extends State<SettingScreen> {
                     onPressed: () async {
                       await SharedPref().clearAll().then((_) {
                         // ignore: use_build_context_synchronously
-                        // context.router.replaceAll([
-                        //   const LoginRoute(),
-                        // ]);
+                        context.router.replaceAll([
+                          const SplashRoute(),
+                        ]);
                       });
                     },
                     child: Text(

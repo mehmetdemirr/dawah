@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomNavigationViewModel extends ChangeNotifier {
-  int selectedIndex = 1;
+  int selectedIndex = 0;
 
   void changeSelectedIndex(int value) {
     selectedIndex = value;

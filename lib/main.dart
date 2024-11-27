@@ -9,6 +9,7 @@ import 'package:davet/core/theme/light_theme.dart';
 import 'package:davet/core/theme/theme_view_model.dart';
 import 'package:davet/core/utilty/hive_items.dart';
 import 'package:davet/product/bottom_navigation/viewmodel/bottom_navigation_viewmodel.dart';
+import 'package:davet/product/story_view/viewmodel/story_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -48,6 +49,9 @@ void main() async {
         ),
         ChangeNotifierProvider<BottomNavigationViewModel>(
           create: (_) => BottomNavigationViewModel(),
+        ),
+        ChangeNotifierProvider<StoryViewViewModel>(
+          create: (_) => StoryViewViewModel(),
         ),
       ],
       child: EasyLocalization(
@@ -92,10 +96,10 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return Column(
             children: [
+              const NoNetworkWidget(),
               Expanded(
                 child: child ?? const SizedBox(),
               ),
-              const NoNetworkWidget(),
             ],
           );
         },

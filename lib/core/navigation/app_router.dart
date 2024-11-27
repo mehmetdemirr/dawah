@@ -12,6 +12,7 @@ import 'package:davet/product/splash/view/splash_screen.dart';
 import 'package:davet/product/starting/view/starting_screen.dart';
 import 'package:davet/product/story_view/view/story_view_screen.dart';
 import 'package:davet/product/task/view/task_screen.dart';
+import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
