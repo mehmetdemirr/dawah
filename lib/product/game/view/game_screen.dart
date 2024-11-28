@@ -80,16 +80,13 @@ class _GameScreenState extends State<GameScreen> {
               animationDuration: 2000,
               percent: 0.4,
               animateFromLastPercent: true,
-              center: Container(
-                // color: Colors.amber,
-                child: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 10),
-                      StarLevelWidget(),
-                    ],
-                  ),
+              center: const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 10),
+                    StarLevelWidget(),
+                  ],
                 ),
               ),
               circularStrokeCap: CircularStrokeCap.round,

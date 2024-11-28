@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:davet/config.dart';
 import 'package:davet/core/extension/screen_size.dart';
 import 'package:davet/core/utilty/border_radius_items.dart';
 import 'package:davet/core/utilty/images_items.dart';

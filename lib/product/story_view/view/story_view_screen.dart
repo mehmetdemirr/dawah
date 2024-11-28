@@ -60,8 +60,9 @@ class _StoryViewScreenState extends State<StoryViewScreen> {
 
       // Geçici dosya yolu al
       final tempDir = await getTemporaryDirectory();
-      final String filePath = '${tempDir.path}/image_to_share.$extension';
+      final String filePath = '${tempDir.path}/image.$extension';
 
+      // ignore: use_build_context_synchronously
       context.read<StoryViewViewModel>().changeLoadingShow();
       // URL'den dosyayı indir
       await dio.download(
@@ -74,6 +75,7 @@ class _StoryViewScreenState extends State<StoryViewScreen> {
           debugPrint('İndirme: ${(count / total * 100).toStringAsFixed(0)}%');
         },
       ).then((_) {
+        // ignore: use_build_context_synchronously
         context.read<StoryViewViewModel>().changeLoadingShow();
         // Dosyayı paylaş
         Share.shareXFiles([XFile(filePath)]);
@@ -93,11 +95,11 @@ class _StoryViewScreenState extends State<StoryViewScreen> {
           onStoryShow: (storyItem, index) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               context.read<StoryViewViewModel>().changeImageUrl(index);
-              print("Showing a story");
+              Log.info("Showing a story");
             });
           },
           onComplete: () {
-            print("Completed a cycle");
+            Log.info("Completed a cycle");
             context.router.popForced();
           },
           progressPosition: ProgressPosition.top,

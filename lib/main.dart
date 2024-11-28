@@ -96,10 +96,10 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return Column(
             children: [
-              const NoNetworkWidget(),
               Expanded(
                 child: child ?? const SizedBox(),
               ),
+              const NoNetworkWidget(),
             ],
           );
         },

@@ -36,13 +36,16 @@ class _NoNetworkWidgetState extends State<NoNetworkWidget> {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      firstChild: SizedBox(
-        height: 40,
-        child: Text(
-          'İnternet Yok !',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.white,
-              ),
+      firstChild: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          height: 40,
+          child: Text(
+            'İnternet Yok !',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.white,
+                ),
+          ),
         ),
       ),
       secondChild: const SizedBox(),

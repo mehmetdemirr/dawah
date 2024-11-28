@@ -15,7 +15,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
   late Location? location;
 
   @override
@@ -25,8 +24,10 @@ class _SplashScreenState extends State<SplashScreen> {
       Box<Location> locationBox = Hive.box<Location>(HiveItem.location.str());
       location = locationBox.get(HiveItem.location.str());
       if (location == null) {
+        // ignore: use_build_context_synchronously
         context.router.replaceNamed(RouterItem.starting.str());
       } else {
+        // ignore: use_build_context_synchronously
         context.router.replaceNamed(RouterItem.bottomNavigation.str());
       }
     });

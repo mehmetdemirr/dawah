@@ -126,7 +126,7 @@ class _StartingScreenState extends State<StartingScreen> {
 
               try {
                 Position position = await locationService.determinePosition();
-                print(
+                Log.info(
                     'Current position: ${position.latitude}, ${position.longitude}');
                 // ignore: use_build_context_synchronously
 
@@ -145,7 +145,7 @@ class _StartingScreenState extends State<StartingScreen> {
                   ]);
                 });
               } catch (e) {
-                print('Error: $e');
+                Log.error('Error: $e');
                 EasyLoading.showError("Konum alınamadı !\nError:$e");
               }
             },

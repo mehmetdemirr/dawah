@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:davet/core/extension/screen_size.dart';
 import 'package:davet/core/location/location_model.dart';
+import 'package:davet/core/log/log.dart';
 import 'package:davet/core/navigation/app_router.dart';
 import 'package:davet/core/utilty/border_radius_items.dart';
 import 'package:davet/core/utilty/color_items.dart';
 import 'package:davet/core/utilty/hive_items.dart';
 import 'package:davet/core/utilty/images_items.dart';
-import 'package:davet/product/apps/view/apps_screen.dart';
 import 'package:davet/product/bottom_navigation/viewmodel/bottom_navigation_viewmodel.dart';
 import 'package:davet/product/home/widget/story_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     StoryModel(imageItem: ImageItem.profileIcon, text: 'Dua', id: 1),
     StoryModel(imageItem: ImageItem.profileIcon, text: 'Özlü Sözler', id: 1),
   ];
-  @override
+
   late Location? location;
 
   final PageController _pageController = PageController();
@@ -52,8 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
     //konum işlemleri
     Box<Location> locationBox = Hive.box<Location>(HiveItem.location.str());
     location = locationBox.get(HiveItem.location.str());
-    // Otomatik sayfa geçişi
-    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+    Log.info("enlem : ${location?.latitude} | boylam : ${location?.longitude}");
+    // Otomatik sayfa geçişi //Günün Rehberinde
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (_currentIndex < _items.length - 1) {
         _currentIndex++;
       } else {
@@ -186,56 +187,59 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontSize: 18,
                   ),
             ),
-            Container(
-              width: context.width,
-              height: 125,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadiusItem.large.str(),
-                color: ColorItem.labelColor.str().withOpacity(0.6),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: PageView.builder(
-                      controller: _pageController,
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentIndex = index;
-                        });
-                      },
-                      itemCount: _items.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              _items[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: context.width,
+                height: 125,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadiusItem.large.str(),
+                  color: ColorItem.labelColor.str().withOpacity(0.6),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        },
+                        itemCount: _items.length,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                _items[index],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  SmoothPageIndicator(
-                    controller: _pageController,
-                    count: _items.length,
-                    effect: WormEffect(
-                      dotHeight: 12,
-                      dotWidth: 12,
-                      activeDotColor: Colors.blueGrey.shade50,
-                      dotColor: Colors.black26,
+                    const SizedBox(height: 16),
+                    SmoothPageIndicator(
+                      controller: _pageController,
+                      count: _items.length,
+                      effect: WormEffect(
+                        dotHeight: 12,
+                        dotWidth: 12,
+                        activeDotColor: Colors.blueGrey.shade50,
+                        dotColor: Colors.black26,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
+                    const SizedBox(height: 8),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -293,128 +297,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              "İlerlemen",
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: context.width,
-                height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadiusItem.large.str(),
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: buildRangePointerExampleGauge(),
-                      ),
-                      const SizedBox(width: 5),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "İlerleme Durumun",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                    color: ColorItem.labelColor.str(),
-                                  ),
-                            ),
-                            SizedBox(
-                              width: context.width - 200,
-                              child: Text(
-                                "Hedefe adım adım yaklaşıyorsun!",
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      color: ColorItem.labelColor.str(),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.arrow_forward_ios_outlined,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
-    );
-  }
-
-  /// Returns the range pointer gauge
-  SfRadialGauge buildRangePointerExampleGauge() {
-    return SfRadialGauge(
-      axes: <RadialAxis>[
-        RadialAxis(
-          showLabels: false,
-          showTicks: false,
-          startAngle: 270,
-          endAngle: 270,
-          radiusFactor: 0.8,
-          axisLineStyle: const AxisLineStyle(
-            thicknessUnit: GaugeSizeUnit.factor,
-            thickness: 0.15,
-          ),
-          annotations: const <GaugeAnnotation>[
-            GaugeAnnotation(
-              angle: 180,
-              widget: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    ' 58 % ',
-                    style: TextStyle(
-                      fontFamily: 'Times',
-                      fontSize: true ? 18 : 22,
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-          pointers: const <GaugePointer>[
-            RangePointer(
-              value: 50,
-              cornerStyle: CornerStyle.bothCurve,
-              enableAnimation: true,
-              animationDuration: 1200,
-              sizeUnit: GaugeSizeUnit.factor,
-              gradient: SweepGradient(
-                colors: <Color>[Color(0xFF6A6EF6), Color(0xFFDB82F5)],
-                stops: <double>[0.25, 0.75],
-              ),
-              color: Color(0xFF00A8B5),
-              width: 0.15,
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

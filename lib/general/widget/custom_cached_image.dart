@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomCachedImageWidget extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final bool isCircular;
   final double? circular;
 
@@ -17,7 +17,7 @@ class CustomCachedImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return imageUrl != null
         ? CachedNetworkImage(
-            imageUrl: imageUrl,
+            imageUrl: imageUrl!,
             placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(),
             ),
