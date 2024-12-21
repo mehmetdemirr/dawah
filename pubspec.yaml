@@ -68,7 +68,8 @@ dependencies:
   web_socket_channel: ^3.0.1
   #location
   geolocator: ^13.0.1
-  #
+  geocoding: ^3.0.0
+  # 
   get_it: ^8.0.0
   #onesignal
   onesignal_flutter: ^5.2.8
