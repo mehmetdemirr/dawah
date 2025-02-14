@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:davet/core/extension/screen_size.dart';
-import 'package:davet/core/utilty/border_radius_items.dart';
 import 'package:davet/core/utilty/color_items.dart';
+import 'package:davet/product/game/model/level_model.dart';
+import 'package:davet/product/game/widget/game_title_widget.dart';
+import 'package:davet/product/game/widget/level_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 @RoutePage()
 class GameScreen extends StatefulWidget {
@@ -13,10 +13,100 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  List<LevelModel> islamicLevels = [
+    LevelModel(
+      id: 1,
+      level: 'Başlangıç',
+      status: 2,
+      rating: 2,
+      levelTitle: 'İslam’a Giriş',
+      levelDescription:
+          'İslam’ın temel prensiplerini öğrenin, beş şartı keşfedin.',
+    ),
+    LevelModel(
+      id: 2,
+      level: 'Başlangıç-Orta',
+      status: 2,
+      rating: 2,
+      levelTitle: 'Peygamber Efendimiz (sav)',
+      levelDescription:
+          'Peygamber Efendimiz (sav)’in hayatını ve öğretilerini öğrenin.',
+    ),
+    LevelModel(
+      id: 3,
+      level: 'Başlangıç - Orta',
+      status: 1,
+      rating: 3,
+      levelTitle: 'İslam’ın Beş Şartı',
+      levelDescription:
+          'İslam’ın Beş Şartı hakkında derinlemesine bilgi edinin.',
+    ),
+    LevelModel(
+      id: 4,
+      level: 'Orta-İleri',
+      status: 0,
+      rating: 4,
+      levelTitle: 'Kur’an ve Hadis',
+      levelDescription:
+          'Kur’an ve Peygamber Efendimiz (sav)’in hadisleri hakkında bilgi sahibi olun.',
+    ),
+    LevelModel(
+      id: 5,
+      level: 'İleri',
+      status: 0,
+      rating: 5,
+      levelTitle: 'Fıkıh (İslam Hukuku)',
+      levelDescription:
+          'İslam hukuku ve temel dini hükümler hakkında bilgi edinin.',
+    ),
+    LevelModel(
+      id: 6,
+      level: 'İleri',
+      status: 0,
+      rating: 0,
+      levelTitle: 'İslam Tarihi',
+      levelDescription:
+          'İslam’ın tarihsel süreci ve önemli olaylarını keşfedin.',
+    ),
+    LevelModel(
+      id: 7,
+      level: 'İleri',
+      status: 0,
+      rating: 5,
+      levelTitle: 'İslam Felsefesi',
+      levelDescription:
+          'İslam düşüncesinde temel felsefi kavramları inceleyin.',
+    ),
+    LevelModel(
+      id: 8,
+      level: 'Uzman',
+      status: 0,
+      rating: 6,
+      levelTitle: 'Sahabe Hayatı',
+      levelDescription:
+          'Peygamber Efendimiz (sav)’in sahabelerinin hayatlarını ve katkılarını inceleyin.',
+    ),
+    LevelModel(
+      id: 9,
+      level: 'Uzman',
+      status: 0,
+      rating: 6,
+      levelTitle: 'Tefsir (Kur’an Yorumları)',
+      levelDescription:
+          'Kur’an ayetlerinin derinlemesine yorumlarını ve anlamlarını öğrenin.',
+    ),
+    LevelModel(
+      id: 10,
+      level: 'Uzman',
+      status: 0,
+      rating: 7,
+      levelTitle: 'İslam İtikadı (Akaid)',
+      levelDescription:
+          'İslam’ın temel inanç esaslarını ve teolojik görüşlerini öğrenin.',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
-    double height = (context.height - 200) / 45;
-    double width = (context.width - 212);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -66,191 +156,31 @@ class _GameScreenState extends State<GameScreen> {
           const SizedBox(width: 10),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            const GameTitleWidget(),
-            const SizedBox(height: 5),
-            CircularPercentIndicator(
-              backgroundColor: Colors.grey.shade400,
-              radius: 55.0,
-              lineWidth: 8.0,
-              animation: true,
-              animationDuration: 2000,
-              percent: 0.4,
-              animateFromLastPercent: true,
-              center: const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 10),
-                    StarLevelWidget(),
-                  ],
-                ),
-              ),
-              circularStrokeCap: CircularStrokeCap.round,
-              progressColor: Colors.purple,
-              widgetIndicator: Center(
-                child: Container(
-                  height: 10,
-                  width: 10,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  padding: const EdgeInsets.all(5),
-                ),
-              ),
-            ),
-            SizedBox(height: height),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(width: width / 2 - 40),
-                      const StarLevelWidget(),
-                    ],
-                  ),
-                  SizedBox(height: height),
-                  Row(
-                    children: [
-                      SizedBox(width: width / 2 - 80),
-                      const StarLevelWidget(),
-                    ],
-                  ),
-                  SizedBox(height: height),
-                  const StarLevelWidget(),
-                  SizedBox(height: height),
-                  const StarLevelWidget(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class StarLevelWidget extends StatelessWidget {
-  const StarLevelWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: Stack(
+      body: Column(
         children: [
-          Positioned(
-            top: 9,
-            child: Container(
-              width: 79,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade500,
-                borderRadius: const BorderRadius.all(Radius.circular(50)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade500, // Gölge rengi
-                    blurRadius: 5.0, // Bulanıklık miktarı
-                    offset: const Offset(0, 4), // Yatay ve dikey kayma (x, y)
-                    spreadRadius: 1.5, // Gölgenin yayılma oranı
-                  ),
-                ],
-              ),
-            ),
-          ),
           Container(
-            width: 80,
-            height: 70,
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 211, 209, 209),
-              borderRadius: BorderRadius.all(Radius.circular(100)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: SizedBox(
-                    width: 55,
-                    child: Icon(
-                      Icons.star_rounded,
-                      color: Colors.grey.shade500,
-                      size: 55,
-                    ),
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            child: const GameTitleWidget(),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: islamicLevels.length,
+              itemBuilder: (context, index) {
+                bool isLeft = index % 2 == 0;
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  child: LevelCard(
+                    level: islamicLevels[index].level,
+                    isRight: !isLeft,
+                    status: islamicLevels[index].status,
+                    rating: 3,
+                    levelTitle: islamicLevels[index].levelTitle,
+                    levelDescription: islamicLevels[index].levelDescription,
                   ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class GameTitleWidget extends StatelessWidget {
-  const GameTitleWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: context.width,
-      height: 75,
-      decoration: BoxDecoration(
-        // color: ColorItem.labelColor.str().withOpacity(0.55),
-        // color: Colors.purple.withOpacity(0.7),
-        color: Colors.black87,
-        borderRadius: BorderRadiusItem.medium.str(),
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "1. KISIM, 1. ÜNİTE",
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                        fontWeight: FontWeight.w900,
-                        fontSize: 15,
-                      ),
-                ),
-                Text(
-                  "Kişileri betimle",
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20,
-                      ),
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
-          Container(
-            width: 3,
-            height: 75,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.7),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Icon(
-              Icons.menu_book_outlined,
-              color: Colors.white,
-              size: 30,
+                );
+              },
             ),
           ),
         ],
