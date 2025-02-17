@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:davet/core/navigation/app_router.dart';
 import 'package:davet/core/utilty/color_items.dart';
 import 'package:davet/product/game/model/level_model.dart';
 import 'package:davet/product/game/widget/game_title_widget.dart';
 import 'package:davet/product/game/widget/level_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 @RoutePage()
 class GameScreen extends StatefulWidget {
@@ -170,14 +172,30 @@ class _GameScreenState extends State<GameScreen> {
                 bool isLeft = index % 2 == 0;
                 return Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                  child: LevelCard(
-                    level: islamicLevels[index].level,
-                    isRight: !isLeft,
-                    status: islamicLevels[index].status,
-                    rating: 3,
-                    levelTitle: islamicLevels[index].levelTitle,
-                    levelDescription: islamicLevels[index].levelDescription,
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  child: InkWell(
+                    onTap: () {
+                      if (islamicLevels[index].status == 1 ||
+                          islamicLevels[index].status == 2) {
+                        context.router.push(
+                          LessonsRoute(
+                            levelId: islamicLevels[index].id,
+                            levelTitle: islamicLevels[index].levelTitle,
+                          ),
+                        );
+                      } else {
+                        EasyLoading.showInfo(
+                            "Bu seviyeye henüz ulaşamadınız. Lütfen önceki seviyeleri tamamlayın.");
+                      }
+                    },
+                    child: LevelCard(
+                      level: islamicLevels[index].level,
+                      isRight: isLeft,
+                      status: islamicLevels[index].status,
+                      rating: 3,
+                      levelTitle: islamicLevels[index].levelTitle,
+                      levelDescription: islamicLevels[index].levelDescription,
+                    ),
                   ),
                 );
               },

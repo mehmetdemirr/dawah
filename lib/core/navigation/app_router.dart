@@ -1,10 +1,17 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:davet/product/applications/esmaul_husna/view/esmaul_husna_screen.dart';
+import 'package:davet/product/applications/prayer/view/prayer_detail_screen.dart';
+import 'package:davet/product/applications/prayer/view/prayer_screen.dart';
+import 'package:davet/product/applications/qibla/view/qible_screen.dart';
+import 'package:davet/product/applications/quran/view/quran_screen.dart';
+import 'package:davet/product/applications/zikirmatik/view/zikirmatik_screen.dart';
 import 'package:davet/product/apps/view/apps_screen.dart';
 import 'package:davet/product/bottom_navigation/view/bottom_navigation_screen.dart';
 import 'package:davet/product/game/view/game_screen.dart';
 import 'package:davet/product/home/view/home_screen.dart';
+import 'package:davet/product/lessons/view/lessons_screen.dart';
 import 'package:davet/product/notification/view/notification_screen.dart';
 import 'package:davet/product/profile/view/profile_screen.dart';
 import 'package:davet/product/profile_edit/view/profile_edit_screen.dart';
@@ -13,6 +20,7 @@ import 'package:davet/product/splash/view/splash_screen.dart';
 import 'package:davet/product/starting/view/starting_screen.dart';
 import 'package:davet/product/story_view/view/story_view_screen.dart';
 import 'package:davet/product/task/view/task_screen.dart';
+import 'package:davet/product/applications/quran/view/surah_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
@@ -64,6 +72,38 @@ class AppRouter extends RootStackRouter {
           path: RouterItem.profileEdit.str(),
           page: ProfileEditRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.lessons.str(),
+          page: LessonsRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.zikirmatik.str(),
+          page: ZikirmatikRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.prayer.str(),
+          page: PrayerRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.prayerDetail.str(),
+          page: PrayerDetailRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.qibla.str(),
+          page: QiblaRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.esmaulHusna.str(),
+          page: EsmaulHusnaRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.quran.str(),
+          page: QuranRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.surahDetail.str(),
+          page: SurahDetailRoute.page,
+        ),
       ];
 }
 
@@ -82,6 +122,14 @@ enum RouterItem {
   notification,
   task,
   profileEdit,
+  lessons,
+  zikirmatik,
+  prayer,
+  prayerDetail,
+  qibla,
+  esmaulHusna,
+  quran,
+  surahDetail,
 }
 
 extension RouterItems on RouterItem {

@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
       locale: context.deviceLocale,
 
       debugShowCheckedModeBanner: false,
-      title: 'Fıtı Fıtı',
+      title: 'Davet',
       //theme
       theme: context.watch<ThemeNotifier>().getTheme() ? darkTheme : lightTheme,
       //router

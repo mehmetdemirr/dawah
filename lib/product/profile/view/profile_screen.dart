@@ -125,7 +125,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0) +
+                  const EdgeInsets.only(bottom: 100),
               child: Column(
                 children: [
                   InkWell(

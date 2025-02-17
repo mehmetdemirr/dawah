@@ -24,8 +24,8 @@ class LevelCard extends StatelessWidget {
       textDirection: isRight ? TextDirection.rtl : TextDirection.ltr,
       children: [
         Container(
-          width: 115,
-          height: 115,
+          width: 110,
+          height: 110,
           decoration: BoxDecoration(
             color: status == 1
                 ? Colors.blue
@@ -97,7 +97,7 @@ class LevelCard extends StatelessWidget {
                           itemCount: 3,
                           onRatingUpdate: (rating) {},
                           ignoreGestures: true,
-                          itemSize: 20,
+                          itemSize: 15,
                           ratingWidget: RatingWidget(
                             full: const Icon(Icons.star,
                                 color: Color(0xFFffd700)),

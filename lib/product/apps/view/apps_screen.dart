@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:davet/core/extension/screen_size.dart';
+import 'package:davet/core/navigation/app_router.dart';
 import 'package:davet/core/utilty/border_radius_items.dart';
 import 'package:davet/product/apps/model/apps_model.dart';
 import 'package:flutter/material.dart';
@@ -43,14 +43,14 @@ class _AppsScreenState extends State<AppsScreen> {
     ),
     AppsModel(
       id: 5,
-      name: "Namaz Vakitleri'",
+      name: "Namaz Vakitleri",
       description: "Namaz vakitlerini takip edin",
       icon: Icons.schedule,
       color: const Color.fromRGBO(233, 30, 99, 1),
     ),
     AppsModel(
       id: 6,
-      name: "Esma-ül Hüsna'",
+      name: "Esma-ül Hüsna",
       description: "Allahın 99 ismini öğrenin",
       icon: Icons.star,
       color: const Color.fromRGBO(0, 150, 136, 1),
@@ -120,9 +120,22 @@ class _AppsScreenState extends State<AppsScreen> {
           ),
           itemCount: apps.length,
           itemBuilder: (BuildContext context, int index) {
-            double width = context.width;
             return InkWell(
-              onTap: () {},
+              onTap: () {
+                if (apps[index].id == 1) {
+                  context.router.pushNamed(RouterItem.zikirmatik.str());
+                } else if (apps[index].id == 2) {
+                  context.router.pushNamed(RouterItem.qibla.str());
+                } else if (apps[index].id == 3) {
+                  context.router.pushNamed(RouterItem.prayer.str());
+                } else if (apps[index].id == 4) {
+                  context.router.pushNamed(RouterItem.quran.str());
+                } else if (apps[index].id == 5) {
+                  //context.router.pushNamed(RouterItem.prayer.str());
+                } else if (apps[index].id == 6) {
+                  context.router.pushNamed(RouterItem.esmaulHusna.str());
+                }
+              },
               child: Card(
                 color: Colors.white,
                 child: Padding(
@@ -156,7 +169,7 @@ class _AppsScreenState extends State<AppsScreen> {
                       ),
                       Text(
                         textAlign: TextAlign.center,
-                        apps[index].name,
+                        apps[index].description,
                         style:
                             Theme.of(context).textTheme.titleMedium?.copyWith(
                                   fontSize: 12,
